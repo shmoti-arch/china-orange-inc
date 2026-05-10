@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./web:/var/www/html
+    depends_on:
+      - php
+      - postgres
+    networks:
+      - orange-network
+
+  php:
+    build: ./php
+    volumes:
+      - ./web:/var/www/html
+    depends_on:
+      - postgres
+    environment:
+      - DB_HOST=postgres
+      - DB_NAME=orange_db
+      - DB_USER=orange_user
+      - DB_PASS=orange_pass123
+    networks:
+      - orange-network
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: orange_db
+      POSTGRES_USER: orange_user
+      POSTGRES_PASSWORD: orange_pass123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - orange-network
+
+volumes:
+  postgres_data:
+
+networks:
+  orange-network:
+    driver: bridge
