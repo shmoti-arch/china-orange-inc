@@ -1,3 +1,7 @@
+<?php
+// Start output buffering to prevent header issues
+ob_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
