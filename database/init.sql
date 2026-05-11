@@ -44,11 +44,11 @@ CREATE TABLE sessions (
 
 -- Insert default admin user (password: admin123)
 INSERT INTO users (username, email, password_hash, balance, is_admin) 
-VALUES ('admin', 'admin@chinaorange.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 10000.00, TRUE);
+VALUES ('admin', 'admin@chinaorange.com', '$2y$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p02tr9tkzf/fBGi1STPO0uFm', 10000.00, TRUE);
 
 -- Insert sample user (password: user123)
 INSERT INTO users (username, email, password_hash, balance, is_admin) 
-VALUES ('testuser', 'user@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1000.00, FALSE);
+VALUES ('testuser', 'user@example.com', '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', 1000.00, FALSE);
 
 -- Create indexes for better performance
 CREATE INDEX idx_orders_user_id ON orders(user_id);
